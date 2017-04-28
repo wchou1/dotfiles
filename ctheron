@@ -1,0 +1,3 @@
+#!/bin/bash
+
+scp ~/.config/nvim/init.vim wistanchou97@sccs.swarthmore.edu:~/.config/nvim/init.vim

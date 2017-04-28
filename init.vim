@@ -1,6 +1,6 @@
 "
 "
- "______________________ 
+"______________________ 
 "< Wistan's NVIM Config >
  "---------------------- 
         "\   ^__^
@@ -14,23 +14,32 @@
 " PLUGINS----------------------------------------------------------------------------{{{
 " Vim Plug
 call plug#begin()
+" APPEARANCE + THEMES
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'edkolev/tmuxline.vim'
+Plug 'altercation/vim-colors-solarized'
+Plug 'junegunn/rainbow_parentheses.vim', { 'for': ['c', 'cpp'] }
+Plug 'morhetz/gruvbox'
+Plug 'mhartington/oceanic-next'
+Plug 'arakashic/chromatica.nvim', { 'for': ['c', 'cpp'] }
+Plug 'reedes/vim-thematic'
+Plug 'nightsense/vim-crunchbang'
+" UTILITY
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'w0rp/ale'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle' }
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'ctrlpvim/ctrlp.vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'wikitopian/hardmode'
 Plug 'scrooloose/nerdcommenter'
 Plug 'tpope/vim-surround'
 Plug 'vim-scripts/a.vim'
 Plug 'junegunn/vim-easy-align'
-Plug 'Yggdroot/indentLine'
+"Plug 'Yggdroot/indentLine'
+Plug 'nathanaelkane/vim-indent-guides'
 Plug 'floobits/floobits-neovim', { 'on': ['FlooAddBuf', 'FlooInfo', 'FlooJoinWorkspace']}
 Plug 'kshenoy/vim-signature'
-Plug 'edkolev/tmuxline.vim'
 Plug 'sjl/gundo.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'airblade/vim-gitgutter'
@@ -41,16 +50,20 @@ Plug 'shime/vim-livedown', { 'on': ['LivedownToggle', 'LivedownPreview'], 'for':
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-fugitive'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'junegunn/rainbow_parentheses.vim', { 'for': ['c', 'cpp'] }
-Plug 'altercation/vim-colors-solarized'
 Plug 'junegunn/vim-easy-align'
 Plug 'alvan/vim-closetag', {'for': ['html']}
 Plug 'junegunn/vim-peekaboo'
 Plug 'junegunn/gv.vim'
-Plug 'morhetz/gruvbox'
 Plug 'pseewald/anyfold', { 'for': ['c', 'cpp', 'python'] }
 Plug 'itchyny/calendar.vim', { 'on': 'Calendar' }
 Plug 'haya14busa/incsearch.vim'
+Plug 'FredKSchott/CoVim', { 'on': 'CoVim' }
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'Shougo/neosnippet.vim' | Plug 'Shougo/neosnippet-snippets'
+Plug 'cazador481/fakeclip.neovim'
+Plug 'zchee/deoplete-jedi'
+Plug 'wellle/targets.vim'
 call plug#end()
 "------------------------------------------------------------------------------------------}}}
 
@@ -70,16 +83,13 @@ let g:ale_echo_msg_warning_str = '⚠ '
 let g:ale_echo_msg_format = '%severity% [%linter%] %s'
 nmap <silent> <Leader><Leader>z <Plug>(ale_next_wrap)
 nmap <silent> <Leader><Leader>x <Plug>(ale_previous_wrap)
-let g:ale_python_pylint_options = '--disable=W0621,C0111,C0103 --extension-pkg-whitelist=numpy,cv2'
+let g:ale_python_pylint_options = '--disable=W0621,C0111,C0103,C0303,C0326 --extension-pkg-whitelist=numpy,cv2'
 
-" Hardmode
+" Indent Guides
 " autocmd VimEnter,BufNewFile,BufReadPost * if !strlen(&buftype) | silent! call HardMode() | endif
-
-" Ctrl-P
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.dmg,*.doc,*.pdf,*.docx,*.png,*.jpeg,*.jpg,*.app,*.mp3,*.flac,*.mp4,*.mkv,*.nfo,*.webloc,*.plist,*.epub,*.sqlite,*.srt,*.ape,*.key,*.pptx,*.psd,*.pages,*.avi,*.sfv,*.cache,*.mobi,*.log,*.cue,*.search?,*.rst,*.search
-let g:ctrp_working_path_mode = 'ra'
-let g:ctrlp_switch_buffer = 0
-let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
+autocmd VimEnter * IndentGuidesEnable
+"let g:indent_guides_start_level = 2
+"let g:indent_guides_guide_size = 1
 
 " NERDTree
 map <Leader><Leader>t :NERDTreeToggle<CR>
@@ -111,6 +121,14 @@ imap <expr> <S-Tab> pumvisible() ? '<C-p>' : '<S-Tab>'
 "let g:deoplete#sources._=['buffer', 'file']
 "let g:deoplete#omni_patterns = {}
 let g:deoplete#omni#input_patterns.ocaml = '[.\w]+'
+"
+set completeopt-=preview
+"autocmd CompleteDone * pclose
+"
+let g:deoplete#omni_patterns = {}
+let g:deoplete#omni_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)\w*'
+let g:deoplete#omni_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
+let g:deoplete#omni_patterns.python = '[^. \t]\.\w*'
 
 " Tmux Navigator
 nmap <BS> :TmuxNavigateLeft<cr>
@@ -136,10 +154,44 @@ set foldlevel=0
 let g:calendar_google_calendar = 1
 let g:calendar_google_task = 1
 
+" FZF
+imap <c-x><c-j> <plug>(fzf-complete-file-ag)
+imap <c-x><c-l> <plug>(fzf-complete-line)
+imap <c-x><c-k> <plug>(fzf-complete-word)
+nmap <silent> <c-p> :FZF<cr>
+
+" Neosnippet
+"imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+"smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+"xmap <C-k>     <Plug>(neosnippet_expand_target)
+imap <expr><TAB> pumvisible() ? "\<C-n>" : (neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>") 
+imap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
+imap <expr><CR> pumvisible() ? deoplete#mappings#close_popup() : "\<CR>\<Plug>AutoPairsReturn"
+
+" Fakeclip Neovim
+let g:vim_fakeclip_tmux_plus=1 
+
+" Chromatica
+let g:chromatica#libclang_path='/usr/local/opt/llvm/lib'
+let g:chromatica#enable_at_startup=1
+
+" Vim Thematic
+nnoremap <Leader>T :ThematicNext<CR>
+nnoremap <Leader>P :ThematicPrevious<CR>
+
 " Incsearch
 map /  <Plug>(incsearch-forward)
 map ?  <Plug>(incsearch-backward)
 map g/ <Plug>(incsearch-stay)
+set hlsearch
+let g:incsearch#auto_nohlsearch = 1
+map n  <Plug>(incsearch-nohl-n)
+map N  <Plug>(incsearch-nohl-N)
+map *  <Plug>(incsearch-nohl-*)
+map #  <Plug>(incsearch-nohl-#)
+map g* <Plug>(incsearch-nohl-g*)
+map g# <Plug>(incsearch-nohl-g#)
+
 "------------------------------------------------------------------------------------------}}}
 
 " NAVIGATION--------------------------------------------------------------------------------{{{
@@ -173,6 +225,7 @@ set smartcase
 
 " toggle highlight
 nnoremap <leader><leader>l :set cursorline!<cr> :highlight CursorLine ctermbg=black<cr>
+nnoremap <leader><leader>c :w !detex \| wc -w<CR>
 
 " move vertically by visual line
 nnoremap j gj
@@ -185,28 +238,43 @@ nnoremap E $
 "------------------------------------------------------------------------------------------}}}
 
 " APPEARANCE------------------------------------------------------------------------------{{{
-" Appearance
-"let g:airline_theme = "solarized"
-"let g:solarized_termcolors=256
-"set t_Co=256
-"syntax enable
-"set background=dark
-"colorscheme solarized
-"set background=dark
+" General
+set termguicolors
+syntax enable
 
-" Sorialized Theme
-" let g:solarized_termtrans = 1
-" set background=dark
-" colorscheme solarized
+" Vim Thematic
+let g:thematic#theme_name = 'oceanic'
+
+let g:thematic#defaults = {
+\   'colorscheme': 'OceanicNext',
+\ 'airline-theme': 'oceanicnext',
+\    'background': 'dark',
+\ }
+
+let g:thematic#themes = {
+\ 'oceanic' :      {'colorscheme': 'OceanicNext',
+\                 'airline-theme': 'oceanicnext',
+\                },
+\ 'gruvbox' :      {'colorscheme': 'gruvbox',
+\                 'airline-theme': 'gruvbox',
+\                },
+\ 'lucario' :      {'colorscheme': 'lucario',
+\                 'airline-theme': 'oceanicnextlight',
+\                },
+\ }
 
 " Gruvbox Theme
-" let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-let g:airline_theme = "gruvbox"
+ ""let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+"colorscheme gruvbox
+"let g:airline_theme = "gruvbox"
 let g:gruvbox_contrast = "medium"
+let g:gruvbox_contrast_dark = "medium"
 let g:gruvbox_hls_cursor = "orange"
 let g:gruvbox_termcolors = 256
-set background=dark
-colorscheme gruvbox
+
+" Oceanic Theme
+"colorscheme OceanicNext
+"let g:airline_theme='oceanicnext'
 
 " Visual autocomplete for command menu
 set wildmenu
@@ -228,6 +296,10 @@ let @j = 'i#include <iostream>#include <vector>#include <bitset>#include <str
 " -----------------------------------------------------------------------------------------}}}
 
 " OTHER------------------------------------------------------------------------------------{{{
+" yank to system clipboard
+autocmd VimEnter * set clipboard=unnamed
+set clipboard+=unnamedplus
+
 " enable filetype detection:
 filetype on
 filetype indent on
@@ -240,8 +312,12 @@ set foldmethod=marker
 noremap Q !!sh<CR>
 
 " switch lines down and up
-nnoremap - ddp
-nnoremap _ ddkP
+"nnoremap - ddp
+"nnoremap _ ddkP
+
+" resize vim split
+nnoremap <silent> + :exe "resize " . (winheight(0) * 3/2)<CR>
+nnoremap <silent> - :exe "resize " . (winheight(0) * 2/3)<CR>
 
 " source file
 nnoremap <leader>sop :source %<cr>

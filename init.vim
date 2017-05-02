@@ -87,9 +87,28 @@ let g:ale_python_pylint_options = '--disable=W0621,C0111,C0103,C0303,C0326 --ext
 
 " Indent Guides
 " autocmd VimEnter,BufNewFile,BufReadPost * if !strlen(&buftype) | silent! call HardMode() | endif
-autocmd VimEnter * IndentGuidesEnable
+"autocmd VimEnter * IndentGuidesEnable
 "let g:indent_guides_start_level = 2
 "let g:indent_guides_guide_size = 1
+
+" Easymotion
+" <Leader>f{char} to move to {char}
+map  <Leader>f <Plug>(easymotion-bd-f)
+nmap <Leader>f <Plug>(easymotion-overwin-f)
+map  <Space>f <Plug>(easymotion-bd-f)
+nmap <Space>f <Plug>(easymotion-overwin-f)
+" s{char}{char} to move to {char}{char}
+"nmap <Leader><Leader>f <Plug>(easymotion-overwin-f2)
+" Move to line
+map <Leader>l <Plug>(easymotion-bd-jk)
+nmap <Leader>l <Plug>(easymotion-overwin-line)
+map <Space>l <Plug>(easymotion-bd-jk)
+nmap <Space>l <Plug>(easymotion-overwin-line)
+" Move to word
+map  <Leader>w <Plug>(easymotion-bd-w)
+nmap <Leader>w <Plug>(easymotion-overwin-w)
+map  <Space>w <Plug>(easymotion-bd-w)
+nmap <Space>w <Plug>(easymotion-overwin-w)
 
 " NERDTree
 map <Leader><Leader>t :NERDTreeToggle<CR>
@@ -214,8 +233,8 @@ set showmode
 set showcmd
 "
 " use indents of 4 spaces, and have them copied down lines:
+set tabstop=4
 set shiftwidth=4
-set shiftround
 set expandtab
 set autoindent
 " 

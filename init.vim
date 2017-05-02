@@ -315,6 +315,9 @@ let @j = 'i#include <iostream>#include <vector>#include <bitset>#include <str
 " -----------------------------------------------------------------------------------------}}}
 
 " OTHER------------------------------------------------------------------------------------{{{
+" error bell off
+set belloff=all
+
 " yank to system clipboard
 autocmd VimEnter * set clipboard=unnamed
 set clipboard+=unnamedplus

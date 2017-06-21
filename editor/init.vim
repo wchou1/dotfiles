@@ -21,10 +21,14 @@ Plug 'edkolev/tmuxline.vim'
 Plug 'altercation/vim-colors-solarized'
 Plug 'junegunn/rainbow_parentheses.vim', { 'for': ['c', 'cpp'] }
 Plug 'morhetz/gruvbox'
+Plug 'mhinz/vim-janah'
 Plug 'mhartington/oceanic-next'
 Plug 'arakashic/chromatica.nvim', { 'for': ['c', 'cpp'] }
 Plug 'reedes/vim-thematic'
 Plug 'nightsense/vim-crunchbang'
+Plug 'jdsimcoe/abstract.vim'
+Plug 'tyrannicaltoucan/vim-deep-space'
+Plug 'nathanaelkane/vim-indent-guides'
 " UTILITY
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'w0rp/ale'
@@ -36,15 +40,12 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'tpope/vim-surround'
 Plug 'vim-scripts/a.vim'
 Plug 'junegunn/vim-easy-align'
-"Plug 'Yggdroot/indentLine'
-Plug 'nathanaelkane/vim-indent-guides'
 Plug 'floobits/floobits-neovim', { 'on': ['FlooAddBuf', 'FlooInfo', 'FlooJoinWorkspace']}
 Plug 'kshenoy/vim-signature'
 Plug 'sjl/gundo.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'airblade/vim-gitgutter'
 Plug 'terryma/vim-multiple-cursors'
-Plug 'xuhdev/vim-latex-live-preview', { 'on': 'LLPStartPreview' }
 Plug '907th/vim-auto-save'
 Plug 'shime/vim-livedown', { 'on': ['LivedownToggle', 'LivedownPreview'], 'for': 'md'  }
 Plug 'tpope/vim-dispatch'
@@ -55,7 +56,6 @@ Plug 'alvan/vim-closetag', {'for': ['html']}
 Plug 'junegunn/vim-peekaboo'
 Plug 'junegunn/gv.vim'
 Plug 'pseewald/anyfold', { 'for': ['c', 'cpp', 'python'] }
-Plug 'itchyny/calendar.vim', { 'on': 'Calendar' }
 Plug 'haya14busa/incsearch.vim'
 Plug 'FredKSchott/CoVim', { 'on': 'CoVim' }
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -64,6 +64,11 @@ Plug 'Shougo/neosnippet.vim' | Plug 'Shougo/neosnippet-snippets'
 Plug 'cazador481/fakeclip.neovim'
 Plug 'zchee/deoplete-jedi'
 Plug 'wellle/targets.vim'
+Plug 'sheerun/vim-polyglot'
+" NON CODE
+"Plug 'xuhdev/vim-latex-live-preview', { 'on': 'LLPStartPreview' }
+Plug 'donRaphaco/neotex', { 'for': 'tex' }
+Plug 'itchyny/calendar.vim', { 'on': 'Calendar' }
 call plug#end()
 "------------------------------------------------------------------------------------------}}}
 
@@ -85,11 +90,8 @@ nmap <silent> <Leader><Leader>z <Plug>(ale_next_wrap)
 nmap <silent> <Leader><Leader>x <Plug>(ale_previous_wrap)
 let g:ale_python_pylint_options = '--disable=W0621,C0111,C0103,C0303,C0326 --extension-pkg-whitelist=numpy,cv2'
 
-" Indent Guides
-" autocmd VimEnter,BufNewFile,BufReadPost * if !strlen(&buftype) | silent! call HardMode() | endif
-"autocmd VimEnter * IndentGuidesEnable
-"let g:indent_guides_start_level = 2
-"let g:indent_guides_guide_size = 1
+" HardMode
+"autocmd VimEnter,BufNewFile,BufReadPost * if !strlen(&buftype) | silent! call HardMode() | endif
 
 " Easymotion
 " <Leader>f{char} to move to {char}
@@ -110,6 +112,13 @@ nmap <Leader>w <Plug>(easymotion-overwin-w)
 map  <Space>w <Plug>(easymotion-bd-w)
 nmap <Space>w <Plug>(easymotion-overwin-w)
 
+" Indent Guides
+let g:indent_guides_exclude_filetypes = ['help', 'nerdtree']
+let g:indent_guides_color_change_percent = 10
+let g:indent_guides_auto_colors = 1
+let g:indent_guides_start_level = 2
+let g:indent_guides_guide_size = 1
+
 " NERDTree
 map <Leader><Leader>t :NERDTreeToggle<CR>
 let NERDTreeQuitOnOpen = 1
@@ -125,7 +134,14 @@ set updatetime=250
 let g:multi_cursor_use_default_mapping=1
 
 " Latex Live Preview
-let g:livepreview_previewer = 'open -a Skim'
+"let g:livepreview_previewer = 'open -a Skim'
+"let g:livepreview_previewer = 'open -a Preview'
+"let g:tex_conceal = ""
+
+" NeoTex
+let g:neotex_enabled = 1
+let g:neotex_delay = 1000
+let g:neotex_latexdiff = 1
 let g:tex_conceal = ""
 
 " Deoplete 
@@ -174,9 +190,17 @@ let g:calendar_google_calendar = 1
 let g:calendar_google_task = 1
 
 " FZF
+" Mapping selecting mappings
+"nmap <leader><tab> <plug>(fzf-maps-n)
+"xmap <leader><tab> <plug>(fzf-maps-x)
+"omap <leader><tab> <plug>(fzf-maps-o)
+nmap <silent> <leader><leader><tab> :Lines<cr>
+nmap <silent> <leader><tab> :BLines<cr>
+" Insert mode completion
+imap <c-x><c-k> <plug>(fzf-complete-word)
+imap <c-x><c-f> <plug>(fzf-complete-path)
 imap <c-x><c-j> <plug>(fzf-complete-file-ag)
 imap <c-x><c-l> <plug>(fzf-complete-line)
-imap <c-x><c-k> <plug>(fzf-complete-word)
 nmap <silent> <c-p> :FZF<cr>
 
 " Neosnippet
@@ -211,6 +235,10 @@ map #  <Plug>(incsearch-nohl-#)
 map g* <Plug>(incsearch-nohl-g*)
 map g# <Plug>(incsearch-nohl-g#)
 
+" Autotag
+let g:autotagTagsFile=".tags"
+
+
 "------------------------------------------------------------------------------------------}}}
 
 " NAVIGATION--------------------------------------------------------------------------------{{{
@@ -222,7 +250,6 @@ map g# <Plug>(incsearch-nohl-g#)
 " remap buffer switching
 map <Tab> :bnext<CR>
 map <S-Tab> :bprevious<CR>
-:nmap <C-w> :bd<CR>
 
 " line numbers
 set relativenumber
@@ -244,7 +271,6 @@ set smartcase
 
 " toggle highlight
 nnoremap <leader><leader>l :set cursorline!<cr> :highlight CursorLine ctermbg=black<cr>
-nnoremap <leader><leader>c :w !detex \| wc -w<CR>
 
 " move vertically by visual line
 nnoremap j gj
@@ -271,14 +297,23 @@ let g:thematic#defaults = {
 \ }
 
 let g:thematic#themes = {
-\ 'oceanic' :      {'colorscheme': 'OceanicNext',
+\ 'oceanic' :    {'colorscheme': 'OceanicNext',
 \                 'airline-theme': 'oceanicnext',
 \                },
-\ 'gruvbox' :      {'colorscheme': 'gruvbox',
+\ 'gruvbox' :    {'colorscheme': 'gruvbox',
 \                 'airline-theme': 'gruvbox',
 \                },
-\ 'lucario' :      {'colorscheme': 'lucario',
-\                 'airline-theme': 'oceanicnextlight',
+\ 'janah' :      {'colorscheme': 'janah',
+\                 'airline-theme': 'zenburn',
+\                },
+\ 'railscasts' :  {'colorscheme': 'railscasts',
+\                 'airline-theme': 'zenburn',
+\                },
+\ 'abstract' :  {'colorscheme': 'abstract',
+\                 'airline-theme': 'abstract',
+\                },
+\ 'deepspace' :  {'colorscheme': 'deep-space',
+\                 'airline-theme': 'deep_space',
 \                },
 \ }
 
@@ -337,12 +372,22 @@ noremap Q !!sh<CR>
 "nnoremap - ddp
 "nnoremap _ ddkP
 
+" generate ctags
+command GenCtags !ctags -R -o .tags .
+set tags=.tags;
+
 " resize vim split
 nnoremap <silent> + :exe "resize " . (winheight(0) * 3/2)<CR>
 nnoremap <silent> - :exe "resize " . (winheight(0) * 2/3)<CR>
 
 " source file
 nnoremap <leader>sop :source %<cr>
+
+" word count
+nnoremap <leader><leader>c :w !detex \| wc -w<CR>
+
+" open pdf version in Skim
+nnoremap <leader><leader>o :!open -a Skim %:r.pdf <CR>
 
 "------------------------------------------------------------------------------------------}}}
 

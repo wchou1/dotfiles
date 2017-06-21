@@ -286,14 +286,15 @@ nnoremap E $
 
 " APPEARANCE------------------------------------------------------------------------------{{{
 " General
-set termguicolors
 syntax enable
 
 " Vim Thematic
 if has('mac') == 1
+    set termguicolors
     let g:thematic#theme_name = 'oceanic'
 else
-    let g:thematic#theme_name = 'deepspace'
+    set t_Co=256
+    let g:thematic#theme_name = 'gruvbox'
 endif
 
 let g:thematic#defaults = {

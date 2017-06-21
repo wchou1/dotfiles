@@ -1,0 +1,172 @@
+# profile timing code
+#zmodload zsh/zprof
+
+# Path to your oh-my-zsh installation.
+export ZSH=/Users/wistanchou97/.oh-my-zsh
+
+# Set name of the theme to load.
+# Look in ~/.oh-my-zsh/themes/
+# Optionally, if you set this to "random", it'll load a random theme each
+# time that oh-my-zsh is loaded.
+#ZSH_THEME="wistan"
+DEFAULT_USER="wistanchou97"
+
+ZSH_THEME="spaceship"
+SPACESHIP_TIME_SHOW=true
+SPACESHIP_PROMPT_SYMBOL="❯"
+
+
+# Uncomment the following line to use case-sensitive completion.
+# CASE_SENSITIVE="true"
+
+# Uncomment the following line to use hyphen-insensitive completion. Case
+# sensitive completion must be off. _ and - will be interchangeable.
+# HYPHEN_INSENSITIVE="true"
+
+# Uncomment the following line to disable bi-weekly auto-update checks.
+# DISABLE_AUTO_UPDATE="true"
+
+# Uncomment the following line to change how often to auto-update (in days).
+# export UPDATE_ZSH_DAYS=13
+
+# Uncomment the following line to disable colors in ls.
+# DISABLE_LS_COLORS="true"
+
+# Uncomment the following line to disable auto-setting terminal title.
+# DISABLE_AUTO_TITLE="true"
+
+# Uncomment the following line to enable command auto-correction.
+# ENABLE_CORRECTION="true"
+
+# Uncomment the following line to display red dots whilst waiting for completion.
+ COMPLETION_WAITING_DOTS="true"
+
+# Uncomment the following line if you want to disable marking untracked files
+# under VCS as dirty. This makes repository status check for large repositories
+# much, much faster.
+# DISABLE_UNTRACKED_FILES_DIRTY="true"
+
+# Uncomment the following line if you want to change the command execution time
+# stamp shown in the history command output.
+# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# HIST_STAMPS="mm/dd/yyyy"
+
+# Would you like to use another custom folder than $ZSH/custom?
+# ZSH_CUSTOM=/path/to/new-custom-folder
+
+# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
+plugins=(git zsh-autosuggestions fancy-ctrl-z)
+
+# User configuration
+
+export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:~/bin:/opt/X11/bin:/Users/wistanchou97/Library/Android/sdk/tools:/Users/wistanchou97/Library/Android/sdk/platform-tools:/Library/TeX/texbin"
+# export MANPATH="/usr/local/man:$MANPATH"
+
+source $ZSH/oh-my-zsh.sh
+
+# You may need to manually set your language environment
+# export LANG=en_US.UTF-8
+
+# Preferred editor for local and remote sessions
+# if [[ -n $SSH_CONNECTION ]]; then
+#   export EDITOR='vim'
+# else
+#   export EDITOR='mvim'
+# fi
+
+# Compilation flags
+# export ARCHFLAGS="-arch x86_64"
+
+# ssh
+# export SSH_KEY_PATH="~/.ssh/dsa_id"
+
+# Set personal aliases, overriding those provided by oh-my-zsh libs,
+# plugins, and themes. Aliases can be placed here, though oh-my-zsh
+# users are encouraged to define aliases within the ZSH_CUSTOM folder.
+# For a full list of active aliases, run `alias`.
+#
+# Example aliases
+ alias zshconfig="vim ~/.zshrc"
+ alias hconfig="vim ~/.hyper.js"
+ alias ohmyzsh="vim ~/.oh-my-zsh"
+ alias g="git"
+
+ # Aliases
+ alias hh=handinhomework
+ alias swatcs="ssh -Y wchou1@mew.cs.swarthmore.edu"
+ alias swatcsg="ssh -Y wchou1@avocado.cs.swarthmore.edu"
+ alias cs31="python -mwebbrowser https://www.cs.swarthmore.edu/~kwebb/cs31/s16/"
+ alias cs35="python -mwebbrowser https://www.cs.swarthmore.edu/~zpalmer/cs35/s16/"
+ alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
+ alias vim="/usr/local/bin/vim"
+ alias cucumber="ssh -Y wchou1@130.58.68.66"
+ alias ssh-heron="ssh wistanchou97@sccs.swarthmore.edu"
+ alias vim="/usr/local/bin/nvim"
+ alias oldvim="/usr/local/bin/vim"
+ alias xx="clear"
+ alias vimconfig="vim ~/.config/nvim/init.vim"
+ alias valgg="valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes"
+ alias szsh="source ~/.zshrc"
+ alias tmuxconfig="vim ~/.tmux.conf"
+ alias ssh-gwaihir="ssh s-wchou1@gwaihir.sccs.swarthmore.edu"
+ alias sftp-gwaihir="sftp s-wchou1@gwaihir.sccs.swarthmore.edu"
+ alias zach="cd ~/Desktop/CS75"
+ alias lila="cd ~/Desktop/CS46"
+ alias matt="cd ~/Desktop/CV"
+ alias mountcs="sshfs wchou1@lab.cs.swarthmore.edu: /Users/wistanchou97/swatcs"
+ alias umountcs="umount /Users/wistanchou97/swatcs && killall sshfs"
+ alias showswap="ls ~/.local/share/nvim/swap/"
+ alias cleanswap="rm ~/.local/share/nvim/swap/*"
+ alias virtualenv="~/Library/Python/2.7/bin/virtualenv"
+ alias virtualenv3="~/Library/Python/3.6/bin/virtualenv"
+ alias remake="make clean && make"
+ alias swatcsnvim="scp ~/.config/nvim/init.vim wchou1@cs.swarthmore.edu:~/.config/nvim/init.vim"
+ alias ctags="`brew --prefix`/bin/ctags"
+ alias sba="source bin/activate"
+ DISABLE_AUTO_TITLE=true
+ 
+ # for rbenv
+ eval "$(rbenv init -)"
+ # for pyenv
+ eval "$(pyenv init -)"
+export PATH="/usr/local/sbin:$PATH"
+export ARDUINO_SDK_PATH="/Applications/Arduino.app/Contents/Java"
+
+# setting default editor
+export EDITOR='nvim'
+export VISUAL='nvim'
+
+# Enable Vi-style Keybindings
+# bindkey -v
+# export KEYTIMEOUT=1
+# bindkey '^w' backward-kill-word
+# bindkey '^r' history-incremental-search-backward
+# bindkey '^?' backward-delete-char
+
+# zsh syntax highlighting
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# Torch
+#. /Users/wistanchou97/torch/install/bin/torch-activate
+
+# OPAM configuration
+. /Users/wistanchou97/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+
+# Move next only if `homebrew` is installed
+if command -v brew >/dev/null 2>&1; then
+	# Load rupa's z if installed
+	[ -f $(brew --prefix)/etc/profile.d/z.sh ] && source $(brew --prefix)/etc/profile.d/z.sh
+fi
+alias j="z"
+
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# profile timing code
+#zprof
+
+source "/Users/wistanchou97/.oh-my-zsh/custom/themes/spaceship.zsh-theme"
+

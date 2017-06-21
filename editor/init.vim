@@ -60,7 +60,8 @@ Plug 'haya14busa/incsearch.vim'
 Plug 'FredKSchott/CoVim', { 'on': 'CoVim' }
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'Shougo/neosnippet.vim' | Plug 'Shougo/neosnippet-snippets'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 Plug 'cazador481/fakeclip.neovim'
 Plug 'zchee/deoplete-jedi'
 Plug 'wellle/targets.vim'
@@ -203,13 +204,14 @@ imap <c-x><c-j> <plug>(fzf-complete-file-ag)
 imap <c-x><c-l> <plug>(fzf-complete-line)
 nmap <silent> <c-p> :FZF<cr>
 
-" Neosnippet
-"imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-"smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-"xmap <C-k>     <Plug>(neosnippet_expand_target)
-imap <expr><TAB> pumvisible() ? "\<C-n>" : (neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>") 
-imap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
-imap <expr><CR> pumvisible() ? deoplete#mappings#close_popup() : "\<CR>\<Plug>AutoPairsReturn"
+" Ultisnips
+let g:UltiSnipsExpandTrigger='<C-e>'
+let g:UltiSnipsListSnippets='<C-Tab>'
+let g:UltiSnipsJumpForwardTrigger='<C-j>'
+let g:UltiSnipsJumpBackwardTrigger='<C-k>'
+let g:UltiSnipsSnippetsDir="~/.config/nvim/snips"
+let g:UltiSnipsSnippetDirectories=["snips", "UltiSnips"]
+nmap <silent> <Leader>u :UltiSnipsEdit<CR>
 
 " Fakeclip Neovim
 let g:vim_fakeclip_tmux_plus=1 

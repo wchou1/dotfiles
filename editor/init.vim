@@ -328,7 +328,7 @@ let g:thematic#themes = {
  ""let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 "colorscheme gruvbox
 "let g:airline_theme = "gruvbox"
-let g:gruvbox_contrast = "medium"
+"let g:gruvbox_contrast = "medium"
 let g:gruvbox_contrast_dark = "medium"
 let g:gruvbox_hls_cursor = "orange"
 let g:gruvbox_termcolors = 256

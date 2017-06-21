@@ -293,7 +293,7 @@ syntax enable
 if has('mac') == 1
     let g:thematic#theme_name = 'oceanic'
 else
-    let g:thematic#theme_name = 'railscasts'
+    let g:thematic#theme_name = 'deepspace'
 endif
 
 let g:thematic#defaults = {

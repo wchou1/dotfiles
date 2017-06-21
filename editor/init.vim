@@ -290,7 +290,11 @@ set termguicolors
 syntax enable
 
 " Vim Thematic
-let g:thematic#theme_name = 'oceanic'
+if has('mac') == 1
+    let g:thematic#theme_name = 'oceanic'
+else
+    let g:thematic#theme_name = 'railscasts'
+endif
 
 let g:thematic#defaults = {
 \   'colorscheme': 'OceanicNext',

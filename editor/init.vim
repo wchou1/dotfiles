@@ -36,7 +36,6 @@ Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle' }
 Plug 'easymotion/vim-easymotion'
 Plug 'wikitopian/hardmode'
-Plug 'scrooloose/nerdcommenter'
 Plug 'tpope/vim-surround'
 Plug 'vim-scripts/a.vim'
 Plug 'junegunn/vim-easy-align'
@@ -66,6 +65,7 @@ Plug 'cazador481/fakeclip.neovim'
 Plug 'zchee/deoplete-jedi'
 Plug 'wellle/targets.vim'
 Plug 'sheerun/vim-polyglot'
+Plug 'tyru/caw.vim'
 " NON CODE
 "Plug 'xuhdev/vim-latex-live-preview', { 'on': 'LLPStartPreview' }
 Plug 'donRaphaco/neotex', { 'for': 'tex' }

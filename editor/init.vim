@@ -29,11 +29,13 @@ Plug 'nightsense/vim-crunchbang'
 Plug 'jdsimcoe/abstract.vim'
 Plug 'tyrannicaltoucan/vim-deep-space'
 Plug 'nathanaelkane/vim-indent-guides'
+Plug 'matze/vim-move'
 " UTILITY
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'w0rp/ale'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle' }
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'easymotion/vim-easymotion'
 Plug 'wikitopian/hardmode'
 Plug 'tpope/vim-surround'
@@ -66,9 +68,10 @@ Plug 'zchee/deoplete-jedi'
 Plug 'wellle/targets.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'tyru/caw.vim'
+Plug 'tpope/vim-sleuth'
+Plug 'ryanoasis/vim-devicons'
 " NON CODE
-"Plug 'xuhdev/vim-latex-live-preview', { 'on': 'LLPStartPreview' }
-Plug 'donRaphaco/neotex', { 'for': 'tex' }
+Plug 'lervag/vimtex', { 'for': 'tex' }
 Plug 'itchyny/calendar.vim', { 'on': 'Calendar' }
 call plug#end()
 "------------------------------------------------------------------------------------------}}}
@@ -124,6 +127,14 @@ let g:indent_guides_guide_size = 1
 map <Leader><Leader>t :NERDTreeToggle<CR>
 let NERDTreeQuitOnOpen = 1
 
+" NERDTree Syntax Highlight
+let g:NERDTreeFileExtensionHighlightFullName = 1
+let g:NERDTreeExactMatchHighlightFullName = 1
+let g:NERDTreePatternMatchHighlightFullName = 1
+let s:green = "8FAA54"
+let g:NERDTreeExtensionHighlightColor = {} " this line is needed to avoid error
+let g:NERDTreeExtensionHighlightColor['py'] = s:green " sets the color of python files to green
+
 " Gundo
 nnoremap <Leader><Leader>g :GundoToggle<CR>
 let g:gundo_close_on_revert=1
@@ -134,16 +145,30 @@ set updatetime=250
 " Multiple Cursors
 let g:multi_cursor_use_default_mapping=1
 
-" Latex Live Preview
-"let g:livepreview_previewer = 'open -a Skim'
-"let g:livepreview_previewer = 'open -a Preview'
-"let g:tex_conceal = ""
-
 " NeoTex
 let g:neotex_enabled = 1
 let g:neotex_delay = 1000
 let g:neotex_latexdiff = 1
 let g:tex_conceal = ""
+
+" VimTex
+let g:vimtex_compiler_latexmk = {
+\ 'backend' : 'nvim',
+\ 'background' : 1,
+\ 'build_dir' : '',
+\ 'callback' : 1,
+\ 'continuous' : 1,
+\ 'executable' : 'latexmk',
+\ 'options' : [
+\   '-pdf',
+\   '-verbose',
+\   '-file-line-error',
+\   '-synctex=1',
+\   '-interaction=nonstopmode',
+\ ],
+\}
+let g:vimtex_view_method = 'skim'
+let g:airline#extensions#vimtex#enabled = 1
 
 " Deoplete 
 let g:deoplete#enable_at_startup = 1
@@ -164,7 +189,7 @@ set completeopt-=preview
 let g:deoplete#omni_patterns = {}
 let g:deoplete#omni_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)\w*'
 let g:deoplete#omni_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
-let g:deoplete#omni_patterns.python = '[^. \t]\.\w*'
+" let g:deoplete#omni_patterns.python = '[^. \t]\.\w*'
 
 " Tmux Navigator
 nmap <BS> :TmuxNavigateLeft<cr>
@@ -237,9 +262,11 @@ map #  <Plug>(incsearch-nohl-#)
 map g* <Plug>(incsearch-nohl-g*)
 map g# <Plug>(incsearch-nohl-g#)
 
-" Autotag
-let g:autotagTagsFile=".tags"
-
+" Devicons
+let g:webdevicons_enable_nerdtree = 1
+let g:webdevicons_enable_airline_tabline = 1
+let g:webdevicons_enable_airline_statusline = 1
+let g:WebDevIconsOS = 'Darwin'
 
 "------------------------------------------------------------------------------------------}}}
 

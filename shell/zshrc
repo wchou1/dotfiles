@@ -62,7 +62,7 @@ plugins=(git zsh-autosuggestions fancy-ctrl-z)
 
 # User configuration
 
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:~/bin:/opt/X11/bin:/Users/wistanchou97/Library/Android/sdk/tools:/Users/wistanchou97/Library/Android/sdk/platform-tools:/Library/TeX/texbin"
+export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:~/bin:/opt/X11/bin:/Users/wistanchou97/Library/Android/sdk/tools:/Users/wistanchou97/Library/Android/sdk/platform-tools:/Library/TeX/texbin:/Users/wistanchou97/.local/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh

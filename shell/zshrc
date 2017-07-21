@@ -126,6 +126,18 @@ source $ZSH/oh-my-zsh.sh
  alias swatcsnvim="scp ~/.config/nvim/init.vim wchou1@cs.swarthmore.edu:~/.config/nvim/init.vim"
  alias ctags="`brew --prefix`/bin/ctags"
  alias sba="source bin/activate"
+ alias raven="ssh root@45.55.204.132"
+ alias sraven="sftp root@45.55.204.132"
+ alias lori="ssh root@130.58.218.141"
+ alias slori="sftp root@130.58.218.141"
+ alias gibraltar="ssh root@138.197.112.229"
+ alias sgibraltar="sftp root@138.197.112.229"
+ alias mraven='ssh root@45.55.204.132 "/root/access_history"'
+ alias mlori='ssh root@130.58.218.141 "/root/access_history"'
+ alias crow='ssh root@128.199.201.17'
+ alias scrow='sftp root@128.199.201.17'
+ alias mcrow='ssh root@128.199.201.17 "/root/access_history"'
+ alias -g c='pbcopy'
  DISABLE_AUTO_TITLE=true
  
  # for rbenv

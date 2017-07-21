@@ -70,6 +70,7 @@ Plug 'sheerun/vim-polyglot'
 Plug 'tyru/caw.vim'
 Plug 'tpope/vim-sleuth'
 Plug 'ryanoasis/vim-devicons'
+Plug 'MattesGroeger/vim-bookmarks'
 " NON CODE
 Plug 'lervag/vimtex', { 'for': 'tex' }
 Plug 'itchyny/calendar.vim', { 'on': 'Calendar' }
@@ -131,6 +132,8 @@ let NERDTreeQuitOnOpen = 1
 let g:NERDTreeFileExtensionHighlightFullName = 1
 let g:NERDTreeExactMatchHighlightFullName = 1
 let g:NERDTreePatternMatchHighlightFullName = 1
+let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+
 let s:green = "8FAA54"
 let g:NERDTreeExtensionHighlightColor = {} " this line is needed to avoid error
 let g:NERDTreeExtensionHighlightColor['py'] = s:green " sets the color of python files to green
@@ -267,6 +270,35 @@ let g:webdevicons_enable_nerdtree = 1
 let g:webdevicons_enable_airline_tabline = 1
 let g:webdevicons_enable_airline_statusline = 1
 let g:WebDevIconsOS = 'Darwin'
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {} " needed
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['js'] = ''
+
+" Vim Bookmarks
+let g:bookmark_no_default_key_mappings = 1
+function! BookmarkMapKeys()
+    nmap ,m :BookmarkToggle<CR>
+    nmap ,i :BookmarkAnnotate<CR>
+    nmap ,n :BookmarkNext<CR>
+    nmap ,p :BookmarkPrev<CR>
+    nmap ,a :BookmarkShowAll<CR>
+    nmap ,c :BookmarkClear<CR>
+    nmap ,x :BookmarkClearAll<CR>
+    nmap ,kk :BookmarkMoveUp
+    nmap ,jj :BookmarkMoveDown
+endfunction
+function! BookmarkUnmapKeys()
+    unmap ,m
+    unmap ,i
+    unmap ,n
+    unmap ,p
+    unmap ,a
+    unmap ,c
+    unmap ,x
+    unmap ,kk
+    unmap ,jj
+endfunction
+autocmd BufEnter * :call BookmarkMapKeys()
+autocmd BufEnter NERD_tree_* :call BookmarkUnmapKeys()
 
 "------------------------------------------------------------------------------------------}}}
 
@@ -402,9 +434,8 @@ set foldmethod=marker
 " run commands
 noremap Q !!sh<CR>
 
-" switch lines down and up
-"nnoremap - ddp
-"nnoremap _ ddkP
+" close quickfix quickly
+nmap <silent> \` :ccl<CR>
 
 " generate ctags
 command GenCtags !ctags -R -o .tags .
@@ -422,6 +453,10 @@ nnoremap <leader><leader>c :w !detex \| wc -w<CR>
 
 " open pdf version in Skim
 nnoremap <leader><leader>o :!open -a Skim %:r.pdf <CR>
+
+" close quickfix on CR or ESC
+autocmd Filetype qf nmap <buffer> <cr> <cr>:ccl<cr>
+autocmd Filetype qf nmap <buffer> <Esc> :q<cr>
 
 "------------------------------------------------------------------------------------------}}}
 

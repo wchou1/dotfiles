@@ -71,9 +71,12 @@ Plug 'tyru/caw.vim'
 Plug 'tpope/vim-sleuth'
 Plug 'ryanoasis/vim-devicons'
 Plug 'MattesGroeger/vim-bookmarks'
+Plug 'coderifous/textobj-word-column.vim'
 " NON CODE
 Plug 'lervag/vimtex', { 'for': 'tex' }
 Plug 'itchyny/calendar.vim', { 'on': 'Calendar' }
+Plug 'junegunn/goyo.vim'
+Plug 'junegunn/limelight.vim'
 call plug#end()
 "------------------------------------------------------------------------------------------}}}
 
@@ -118,8 +121,9 @@ map  <Space>w <Plug>(easymotion-bd-w)
 nmap <Space>w <Plug>(easymotion-overwin-w)
 
 " Indent Guides
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_color_change_percent = 3
 let g:indent_guides_exclude_filetypes = ['help', 'nerdtree']
-let g:indent_guides_color_change_percent = 10
 let g:indent_guides_auto_colors = 1
 let g:indent_guides_start_level = 2
 let g:indent_guides_guide_size = 1
@@ -300,6 +304,12 @@ endfunction
 autocmd BufEnter * :call BookmarkMapKeys()
 autocmd BufEnter NERD_tree_* :call BookmarkUnmapKeys()
 
+" Limelight and Goyo
+let g:goyo_width = '80%'
+let g:goyo_height = '85%'
+autocmd! User GoyoEnter Limelight
+autocmd! User GoyoLeave Limelight!
+
 "------------------------------------------------------------------------------------------}}}
 
 " NAVIGATION--------------------------------------------------------------------------------{{{
@@ -416,6 +426,10 @@ let @j = 'i#include <iostream>#include <vector>#include <bitset>#include <str
 " -----------------------------------------------------------------------------------------}}}
 
 " OTHER------------------------------------------------------------------------------------{{{
+" better spit defaults
+set splitright
+set splitbelow
+
 " error bell off
 set belloff=all
 
@@ -457,6 +471,10 @@ nnoremap <leader><leader>o :!open -a Skim %:r.pdf <CR>
 " close quickfix on CR or ESC
 autocmd Filetype qf nmap <buffer> <cr> <cr>:ccl<cr>
 autocmd Filetype qf nmap <buffer> <Esc> :q<cr>
+
+" Neovim terminal better mode switching
+tnoremap jj <C-\><C-n>
+au BufEnter * if &buftype == 'terminal' | :startinsert | endif
 
 "------------------------------------------------------------------------------------------}}}
 

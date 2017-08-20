@@ -30,6 +30,7 @@ Plug 'jdsimcoe/abstract.vim'
 Plug 'tyrannicaltoucan/vim-deep-space'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'matze/vim-move'
+Plug 'whatyouhide/vim-lengthmatters'
 " UTILITY
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'w0rp/ale'
@@ -70,7 +71,6 @@ Plug 'sheerun/vim-polyglot'
 Plug 'tyru/caw.vim'
 Plug 'tpope/vim-sleuth'
 Plug 'ryanoasis/vim-devicons'
-Plug 'MattesGroeger/vim-bookmarks'
 Plug 'coderifous/textobj-word-column.vim'
 " NON CODE
 Plug 'lervag/vimtex', { 'for': 'tex' }
@@ -277,33 +277,6 @@ let g:WebDevIconsOS = 'Darwin'
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {} " needed
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['js'] = ''
 
-" Vim Bookmarks
-let g:bookmark_no_default_key_mappings = 1
-function! BookmarkMapKeys()
-    nmap ,m :BookmarkToggle<CR>
-    nmap ,i :BookmarkAnnotate<CR>
-    nmap ,n :BookmarkNext<CR>
-    nmap ,p :BookmarkPrev<CR>
-    nmap ,a :BookmarkShowAll<CR>
-    nmap ,c :BookmarkClear<CR>
-    nmap ,x :BookmarkClearAll<CR>
-    nmap ,kk :BookmarkMoveUp
-    nmap ,jj :BookmarkMoveDown
-endfunction
-function! BookmarkUnmapKeys()
-    unmap ,m
-    unmap ,i
-    unmap ,n
-    unmap ,p
-    unmap ,a
-    unmap ,c
-    unmap ,x
-    unmap ,kk
-    unmap ,jj
-endfunction
-autocmd BufEnter * :call BookmarkMapKeys()
-autocmd BufEnter NERD_tree_* :call BookmarkUnmapKeys()
-
 " Limelight and Goyo
 let g:goyo_width = '80%'
 let g:goyo_height = '85%'
@@ -413,7 +386,7 @@ set wildmenu
 nnoremap <leader><space> :nohlsearch<CR>
 
 " 80 character color column
-set colorcolumn=80
+" set colorcolumn=80
 "------------------------------------------------------------------------------------------}}}
 
 " SAVED MACROS----------------------------------------------------------------------------------{{{

@@ -96,14 +96,17 @@ source $ZSH/oh-my-zsh.sh
 
  # Aliases
  alias hh=handinhomework
- alias swatcs="ssh -Y wchou1@mew.cs.swarthmore.edu"
- alias swatcsg="ssh -Y wchou1@avocado.cs.swarthmore.edu"
+ alias swatcs="ssh wchou1@mew.cs.swarthmore.edu"
+ alias swatcsy="ssh -Y wchou1@mew.cs.swarthmore.edu"
+ alias swatcs-milk="ssh wchou1@milk.cs.swarthmore.edu"
+ alias swatcsy-milk="ssh -Y wchou1@milk.cs.swarthmore.edu"
  alias cs31="python -mwebbrowser https://www.cs.swarthmore.edu/~kwebb/cs31/s16/"
  alias cs35="python -mwebbrowser https://www.cs.swarthmore.edu/~zpalmer/cs35/s16/"
  alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
  alias vim="/usr/local/bin/vim"
  alias cucumber="ssh -Y wchou1@130.58.68.66"
  alias ssh-heron="ssh wistanchou97@sccs.swarthmore.edu"
+ alias ssh-ibis="ssh s-wistan@ibis.sccs.swarthmore.edu"
  alias vim="/usr/local/bin/nvim"
  alias oldvim="/usr/local/bin/vim"
  alias xx="clear"
@@ -116,8 +119,6 @@ source $ZSH/oh-my-zsh.sh
  alias zach="cd ~/Desktop/CS75"
  alias lila="cd ~/Desktop/CS46"
  alias matt="cd ~/Desktop/CV"
- alias mountcs="sshfs wchou1@lab.cs.swarthmore.edu: /Users/wistanchou97/swatcs"
- alias umountcs="umount /Users/wistanchou97/swatcs && killall sshfs"
  alias showswap="ls ~/.local/share/nvim/swap/"
  alias cleanswap="rm ~/.local/share/nvim/swap/*"
  alias virtualenv="~/Library/Python/2.7/bin/virtualenv"

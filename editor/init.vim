@@ -10,53 +10,51 @@
                 "||     ||
 "
 " 
-
 " PLUGINS----------------------------------------------------------------------------{{{
 " Vim Plug
 call plug#begin()
 " APPEARANCE + THEMES
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'chauncey-garrett/vim-colorizer'
+Plug 'whatyouhide/vim-lengthmatters'
+Plug 'kh3phr3n/python-syntax'
 Plug 'edkolev/tmuxline.vim'
+Plug 'reedes/vim-thematic'
+Plug 'matze/vim-move'
+Plug 'junegunn/rainbow_parentheses.vim', { 'for': ['c', 'cpp', 'python'] }
+Plug 'arakashic/chromatica.nvim', { 'for': ['c', 'cpp'] }
+Plug 'tyrannicaltoucan/vim-deep-space'
 Plug 'altercation/vim-colors-solarized'
-Plug 'junegunn/rainbow_parentheses.vim', { 'for': ['c', 'cpp'] }
+Plug 'liuchengxu/space-vim-dark'
+Plug 'mhartington/oceanic-next'
+Plug 'whatyouhide/vim-gotham'
+Plug 'joshdick/onedark.vim'
 Plug 'morhetz/gruvbox'
 Plug 'mhinz/vim-janah'
-Plug 'mhartington/oceanic-next'
-Plug 'arakashic/chromatica.nvim', { 'for': ['c', 'cpp'] }
-Plug 'reedes/vim-thematic'
-Plug 'nightsense/vim-crunchbang'
-Plug 'jdsimcoe/abstract.vim'
-Plug 'tyrannicaltoucan/vim-deep-space'
-Plug 'nathanaelkane/vim-indent-guides'
-Plug 'matze/vim-move'
-Plug 'whatyouhide/vim-lengthmatters'
 " UTILITY
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'w0rp/ale'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle' }
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'terryma/vim-multiple-cursors'
 Plug 'easymotion/vim-easymotion'
-Plug 'wikitopian/hardmode'
-Plug 'tpope/vim-surround'
-Plug 'vim-scripts/a.vim'
-Plug 'junegunn/vim-easy-align'
-Plug 'floobits/floobits-neovim', { 'on': ['FlooAddBuf', 'FlooInfo', 'FlooJoinWorkspace']}
-Plug 'kshenoy/vim-signature'
-Plug 'sjl/gundo.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'airblade/vim-gitgutter'
-Plug 'terryma/vim-multiple-cursors'
-Plug '907th/vim-auto-save'
-Plug 'shime/vim-livedown', { 'on': ['LivedownToggle', 'LivedownPreview'], 'for': 'md'  }
+Plug 'tpope/vim-surround'
+Plug 'vim-scripts/a.vim'
+Plug 'w0rp/ale'
+Plug 'junegunn/vim-easy-align'
+Plug 'kshenoy/vim-signature'
+Plug 'sjl/gundo.vim'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-fugitive'
+Plug 'shime/vim-livedown', { 'on': ['LivedownToggle', 'LivedownPreview'], 'for': 'md'  }
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'junegunn/vim-easy-align'
 Plug 'alvan/vim-closetag', {'for': ['html']}
 Plug 'junegunn/vim-peekaboo'
-Plug 'junegunn/gv.vim'
 Plug 'pseewald/anyfold', { 'for': ['c', 'cpp', 'python'] }
 Plug 'haya14busa/incsearch.vim'
 Plug 'FredKSchott/CoVim', { 'on': 'CoVim' }
@@ -67,11 +65,23 @@ Plug 'honza/vim-snippets'
 Plug 'cazador481/fakeclip.neovim'
 Plug 'zchee/deoplete-jedi'
 Plug 'wellle/targets.vim'
+Plug 'wellle/tmux-complete.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'tyru/caw.vim'
 Plug 'tpope/vim-sleuth'
 Plug 'ryanoasis/vim-devicons'
 Plug 'coderifous/textobj-word-column.vim'
+Plug 'dhruvasagar/vim-table-mode'
+Plug 'mattn/emmet-vim', { 'for': ['html', 'css'] }
+Plug 'elzr/vim-json'
+Plug 'itchyny/vim-cursorword'
+Plug 'kana/vim-operator-user'
+Plug 'haya14busa/vim-operator-flashy'
+Plug 'terryma/vim-expand-region'
+Plug 'AndrewRadev/sideways.vim'
+Plug 'AndrewRadev/splitjoin.vim'
+Plug 'AndrewRadev/dsf.vim'
+Plug 'tpope/tpope-vim-abolish'
 " NON CODE
 Plug 'lervag/vimtex', { 'for': 'tex' }
 Plug 'itchyny/calendar.vim', { 'on': 'Calendar' }
@@ -98,9 +108,6 @@ nmap <silent> <Leader><Leader>z <Plug>(ale_next_wrap)
 nmap <silent> <Leader><Leader>x <Plug>(ale_previous_wrap)
 let g:ale_python_pylint_options = '--disable=W0621,C0111,C0103,C0303,C0326 --extension-pkg-whitelist=numpy,cv2'
 
-" HardMode
-"autocmd VimEnter,BufNewFile,BufReadPost * if !strlen(&buftype) | silent! call HardMode() | endif
-
 " Easymotion
 " <Leader>f{char} to move to {char}
 map  <Leader>f <Plug>(easymotion-bd-f)
@@ -121,6 +128,7 @@ map  <Space>w <Plug>(easymotion-bd-w)
 nmap <Space>w <Plug>(easymotion-overwin-w)
 
 " Indent Guides
+colorscheme default
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_color_change_percent = 3
 let g:indent_guides_exclude_filetypes = ['help', 'nerdtree']
@@ -283,6 +291,27 @@ let g:goyo_height = '85%'
 autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
 
+" Python Syntax
+let python_highlight_all = 1
+
+" Vim Table Mode
+let g:table_mode_corner_corner='+'
+let g:table_mode_header_fillchar='='
+
+" Tmux Complete
+let g:tmuxcomplete#trigger = ''
+
+" Emmet
+" let g:user_emmet_leader_key='<C-l>'
+
+" Operator Flashy
+map y <Plug>(operator-flashy)
+nmap Y <Plug>(operator-flashy)$
+
+" Sideways
+nnoremap <M-h> :SidewaysLeft<cr>
+nnoremap <M-l> :SidewaysRight<cr>
+
 "------------------------------------------------------------------------------------------}}}
 
 " NAVIGATION--------------------------------------------------------------------------------{{{
@@ -346,24 +375,30 @@ let g:thematic#defaults = {
 \ }
 
 let g:thematic#themes = {
-\ 'oceanic' :    {'colorscheme': 'OceanicNext',
-\                 'airline-theme': 'oceanicnext',
-\                },
-\ 'gruvbox' :    {'colorscheme': 'gruvbox',
-\                 'airline-theme': 'gruvbox',
-\                },
-\ 'janah' :      {'colorscheme': 'janah',
-\                 'airline-theme': 'zenburn',
-\                },
-\ 'railscasts' :  {'colorscheme': 'railscasts',
-\                 'airline-theme': 'zenburn',
-\                },
-\ 'abstract' :  {'colorscheme': 'abstract',
-\                 'airline-theme': 'abstract',
-\                },
-\ 'deepspace' :  {'colorscheme': 'deep-space',
-\                 'airline-theme': 'deep_space',
-\                },
+\ 'oceanic' :       {'colorscheme': 'OceanicNext',
+\                    'airline-theme': 'oceanicnext',
+\                   },
+\ 'gruvbox' :       {'colorscheme': 'gruvbox',
+\                    'airline-theme': 'gruvbox',
+\                   },
+\ 'janah' :         {'colorscheme': 'janah',
+\                    'airline-theme': 'zenburn',
+\                   },
+\ 'railscasts' :    {'colorscheme': 'railscasts',
+\                    'airline-theme': 'zenburn',
+\                   },
+\ 'deepspace' :     {'colorscheme': 'deep-space',
+\                    'airline-theme': 'deep_space',
+\                   },
+\ 'spacevimdark' :  {'colorscheme': 'space-vim-dark',
+\                    'airline-theme': 'deep_space',
+\                   },
+\ 'gotham' :        {'colorscheme': 'gotham',
+\                    'airline-theme': 'gotham',
+\                   },
+\ 'onedark' :       {'colorscheme': 'onedark',
+\                    'airline-theme': 'onedark',
+\                   },
 \ }
 
 " Gruvbox Theme
@@ -399,6 +434,10 @@ let @j = 'i#include <iostream>#include <vector>#include <bitset>#include <str
 " -----------------------------------------------------------------------------------------}}}
 
 " OTHER------------------------------------------------------------------------------------{{{
+" reformat python
+autocmd FileType python nnoremap <LocalLeader>= :0,$!python -m yapf<CR>
+autocmd FileType python nnoremap <LocalLeader>i :!isort %<CR><CR>
+
 " better spit defaults
 set splitright
 set splitbelow
@@ -429,8 +468,8 @@ command GenCtags !ctags -R -o .tags .
 set tags=.tags;
 
 " resize vim split
-nnoremap <silent> + :exe "resize " . (winheight(0) * 3/2)<CR>
-nnoremap <silent> - :exe "resize " . (winheight(0) * 2/3)<CR>
+" nnoremap <silent> + :exe "resize " . (winheight(0) * 3/2)<CR>
+" nnoremap <silent> - :exe "resize " . (winheight(0) * 2/3)<CR>
 
 " source file
 nnoremap <leader>sop :source %<cr>

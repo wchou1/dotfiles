@@ -33,55 +33,71 @@ Plug 'whatyouhide/vim-gotham'
 Plug 'joshdick/onedark.vim'
 Plug 'morhetz/gruvbox'
 Plug 'mhinz/vim-janah'
+"
+"
 " UTILITY
+" 
+" Completion
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle' }
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-Plug 'terryma/vim-multiple-cursors'
-Plug 'easymotion/vim-easymotion'
+Plug 'zchee/deoplete-jedi'
 Plug 'jiangmiao/auto-pairs'
-Plug 'airblade/vim-gitgutter'
-Plug 'tpope/vim-surround'
-Plug 'vim-scripts/a.vim'
-Plug 'w0rp/ale'
-Plug 'junegunn/vim-easy-align'
-Plug 'kshenoy/vim-signature'
-Plug 'sjl/gundo.vim'
-Plug 'tpope/vim-dispatch'
-Plug 'tpope/vim-fugitive'
-Plug 'shime/vim-livedown', { 'on': ['LivedownToggle', 'LivedownPreview'], 'for': 'md'  }
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'junegunn/vim-easy-align'
-Plug 'alvan/vim-closetag', {'for': ['html']}
-Plug 'junegunn/vim-peekaboo'
-Plug 'pseewald/anyfold', { 'for': ['c', 'cpp', 'python'] }
-Plug 'haya14busa/incsearch.vim'
-Plug 'FredKSchott/CoVim', { 'on': 'CoVim' }
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-Plug 'cazador481/fakeclip.neovim'
-Plug 'zchee/deoplete-jedi'
+" Explorer
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'sjl/gundo.vim'
+Plug 'junegunn/vim-peekaboo' " Buffer explore
+Plug 'vim-scripts/a.vim'
+" Github
+Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle' }
+Plug 'tpope/vim-fugitive'
+" Editing Tools
+Plug 'terryma/vim-multiple-cursors'
+Plug 'easymotion/vim-easymotion'
+Plug 'tpope/vim-surround'
+Plug 'junegunn/vim-easy-align'
+Plug 'junegunn/vim-easy-align'
 Plug 'wellle/targets.vim'
-Plug 'wellle/tmux-complete.vim'
-Plug 'sheerun/vim-polyglot'
 Plug 'tyru/caw.vim'
-Plug 'tpope/vim-sleuth'
-Plug 'ryanoasis/vim-devicons'
 Plug 'coderifous/textobj-word-column.vim'
 Plug 'dhruvasagar/vim-table-mode'
-Plug 'mattn/emmet-vim', { 'for': ['html', 'css'] }
-Plug 'elzr/vim-json'
-Plug 'itchyny/vim-cursorword'
-Plug 'kana/vim-operator-user'
-Plug 'haya14busa/vim-operator-flashy'
 Plug 'terryma/vim-expand-region'
+" Search
+Plug 'haya14busa/incsearch.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+" Interface
+Plug 'airblade/vim-gitgutter'
+Plug 'kshenoy/vim-signature'
+Plug 'pseewald/anyfold', { 'for': ['c', 'cpp', 'python'] }
+Plug 'tpope/vim-sleuth' " Heuristical indentation
+Plug 'elzr/vim-json' " Better coloration for json
+Plug 'ryanoasis/vim-devicons'
+Plug 'itchyny/vim-cursorword'
+" Integration
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'cazador481/fakeclip.neovim'
+Plug 'wellle/tmux-complete.vim'
+" Linting
+Plug 'w0rp/ale'
+Plug 'sheerun/vim-polyglot' " Language pack
+" Latex
+Plug 'shime/vim-livedown', { 'on': ['LivedownToggle', 'LivedownPreview'], 'for': 'md'  }
+" Language Specific
+Plug 'alvan/vim-closetag', {'for': ['html']}
+" Misc
+Plug 'FredKSchott/CoVim', { 'on': 'CoVim' }
+Plug 'mattn/emmet-vim', { 'for': ['html', 'css'] }
+Plug 'kana/vim-operator-user'
+Plug 'haya14busa/vim-operator-flashy' " Highlight yanked
+
 Plug 'AndrewRadev/sideways.vim'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'AndrewRadev/dsf.vim'
 Plug 'tpope/tpope-vim-abolish'
+Plug 'hkupty/iron.nvim', { 'for': ['python'] }
+Plug 'guywald1/vim-prismo'
 " NON CODE
 Plug 'lervag/vimtex', { 'for': 'tex' }
 Plug 'itchyny/calendar.vim', { 'on': 'Calendar' }
@@ -96,16 +112,17 @@ let g:airline_powerline_fonts = 1
 set laststatus=2
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tmuxline#enabled = 0
-let g:airline_section_error = '%{ALEGetStatusLine()}'
+" let g:airline_section_error = '%{ALEGetStatusLine()}'
+let g:airline#extensions#ale#enabled = 1
 
 " Async Linter Engine
 let g:ale_sign_column_always = 1
-let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
+" let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
 let g:ale_echo_msg_error_str = '⨉'
 let g:ale_echo_msg_warning_str = '⚠ '
 let g:ale_echo_msg_format = '%severity% [%linter%] %s'
-nmap <silent> <Leader><Leader>z <Plug>(ale_next_wrap)
-nmap <silent> <Leader><Leader>x <Plug>(ale_previous_wrap)
+nmap <silent> <Leader>e <Plug>(ale_next_wrap)
+nmap <silent> <Leader>E <Plug>(ale_previous_wrap)
 let g:ale_python_pylint_options = '--disable=W0621,C0111,C0103,C0303,C0326 --extension-pkg-whitelist=numpy,cv2'
 
 " Easymotion
@@ -159,6 +176,12 @@ set updatetime=250
 
 " Multiple Cursors
 let g:multi_cursor_use_default_mapping=1
+function g:Multiple_cursors_before()
+    let g:deoplete#disable_auto_complete = 1
+endfunction
+function g:Multiple_cursors_after()
+    let g:deoplete#disable_auto_complete = 0
+endfunction
 
 " NeoTex
 let g:neotex_enabled = 1
@@ -197,6 +220,12 @@ imap <expr> <S-Tab> pumvisible() ? '<C-p>' : '<S-Tab>'
 "let g:deoplete#sources._=['buffer', 'file']
 "let g:deoplete#omni_patterns = {}
 let g:deoplete#omni#input_patterns.ocaml = '[.\w]+'
+call deoplete#custom#source('jedi',          'mark', '')
+call deoplete#custom#source('omni',          'mark', '')
+call deoplete#custom#source('ternjs',        'mark', '')
+call deoplete#custom#source('vim',           'mark', '')
+call deoplete#custom#source('buffer',        'mark', '')
+call deoplete#custom#source('tmux-complete', 'mark', '')
 "
 set completeopt-=preview
 "autocmd CompleteDone * pclose
@@ -312,9 +341,31 @@ nmap Y <Plug>(operator-flashy)$
 nnoremap <M-h> :SidewaysLeft<cr>
 nnoremap <M-l> :SidewaysRight<cr>
 
+" Expand Region
+map ( <Plug>(expand_region_shrink)
+map ) <Plug>(expand_region_expand)
+
+" IRON
+map \r :IronRepl<cr>
+augroup ironmapping
+    autocmd!
+    autocmd Filetype python nmap <buffer> <localleader>t <Plug>(iron-send-motion)
+    autocmd Filetype python vmap <buffer> <localleader>t <Plug>(iron-send-motion)
+augroup END
+
+" Polyglot
+let g:polyglot_disabled = ['latex']
+
 "------------------------------------------------------------------------------------------}}}
 
 " NAVIGATION--------------------------------------------------------------------------------{{{
+" deal with terminal mode
+tnoremap <Esc> <C-\><C-n>
+tnoremap <C-h> <C-\><C-N><C-w>h
+tnoremap <C-j> <C-\><C-N><C-w>j
+tnoremap <C-k> <C-\><C-N><C-w>k
+tnoremap <C-l> <C-\><C-N><C-w>l
+
 " remap escape key
 "inoremap jj <ESC>
 "inoremap jk <ESC>
@@ -463,13 +514,16 @@ noremap Q !!sh<CR>
 " close quickfix quickly
 nmap <silent> \` :ccl<CR>
 
+" save hardcopy
+nmap <leader>p :hardcopy > %.ps<CR>
+
 " generate ctags
 command GenCtags !ctags -R -o .tags .
 set tags=.tags;
 
 " resize vim split
-" nnoremap <silent> + :exe "resize " . (winheight(0) * 3/2)<CR>
-" nnoremap <silent> - :exe "resize " . (winheight(0) * 2/3)<CR>
+nnoremap <silent> + :exe "resize " . (winheight(0) * 5/4)<CR>
+nnoremap <silent> - :exe "resize " . (winheight(0) * 4/5)<CR>
 
 " source file
 nnoremap <leader>sop :source %<cr>
@@ -487,6 +541,10 @@ autocmd Filetype qf nmap <buffer> <Esc> :q<cr>
 " Neovim terminal better mode switching
 tnoremap jj <C-\><C-n>
 au BufEnter * if &buftype == 'terminal' | :startinsert | endif
+
+" Neovim python and python3 interpreters via pyenv virtualenv
+let g:python_host_prog = '/Users/wistanchou97/.pyenv/versions/neovim2/bin/python'
+let g:python3_host_prog = '/Users/wistanchou97/.pyenv/versions/neovim3/bin/python'
 
 "------------------------------------------------------------------------------------------}}}
 
@@ -581,7 +639,7 @@ endfunction
 
 nnoremap <silent> <Plug>(RotateLines) :<C-u>call <SID>RotateLines()<CR>
 
-nmap \r <Plug>(RotateLines)
+nmap <leader><leader>r <Plug>(RotateLines)
 " -----------------------------------------------------------------------------------------}}}
 "
 " end NVIM config

@@ -135,9 +135,8 @@ source $ZSH/oh-my-zsh.sh
  alias sgibraltar="sftp root@138.197.112.229"
  alias mraven='ssh root@45.55.204.132 "/root/access_history"'
  alias mlori='ssh root@130.58.218.141 "/root/access_history"'
- alias crow='ssh root@128.199.201.17'
- alias scrow='sftp root@128.199.201.17'
- alias mcrow='ssh root@128.199.201.17 "/root/access_history"'
+ alias crow='ssh root@128.199.84.65'
+ alias scrow='sftp root@128.199.84.65'
  alias -g c='pbcopy'
  alias findupes='find -not -empty -type f -printf "%s\n" | sort -rn | uniq -d | xargs -I{} -n1 find -type f -size {}c -print0 | xargs -0 md5sum | sort | uniq -w32 --all-repeated=separate'
  DISABLE_AUTO_TITLE=true
@@ -146,6 +145,7 @@ source $ZSH/oh-my-zsh.sh
  eval "$(rbenv init -)"
  # for pyenv
  eval "$(pyenv init -)"
+ eval "$(pyenv virtualenv-init -)"
 export PATH="/usr/local/sbin:$PATH"
 export ARDUINO_SDK_PATH="/Applications/Arduino.app/Contents/Java"
 

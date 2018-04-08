@@ -86,6 +86,10 @@ main() {
     nvim +PlugClean +PlugInstall +PlugUpgrade +PlugUpdate +qall
 }
 
+install_brew () {
+  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+}
+
 install_zsh () {
   # Test to see if zshell is installed.  If it is:
   if [ -f /bin/zsh -o -f /usr/bin/zsh ]; then
@@ -119,7 +123,30 @@ install_zsh () {
   fi
 }
 
+install_useful () {
+  brew install tmux
+  brew install pyenv
+}
+
+setup_pyenv_virtualenvs () {
+  pyenv install 2.7.11
+  pyenv install 3.4.4
+
+  pyenv virtualenv 2.7.11 neovim2
+  pyenv virtualenv 3.4.4 neovim3
+
+  pyenv activate neovim2
+  pip install neovim
+  echo "Use following path for vimconfig 'let g:python_host_prog ='"
+  pyenv which python  # Note the path
+
+  pyenv activate neovim3
+  pip install neovim
+  echo "Use following path for vimconfig 'let g:python3_host_prog ='"
+  pyenv which python  # Note the path
+}
+
+# install_brew
+# install_useful
 main
 install_zsh
-
-main
